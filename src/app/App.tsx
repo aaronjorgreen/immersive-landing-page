@@ -16,7 +16,6 @@ export default function App() {
         <main className="relative">
           <HeroSection />
           <CanopySection />
-          <CanopySection />
           <div className="section-lazy">
             <RiverSection />
             <WildlifeSection />
