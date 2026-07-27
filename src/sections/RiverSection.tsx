@@ -4,10 +4,13 @@ import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { WaterLayer } from '@/components/layers/WaterLayer'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
 import { getHeadlines } from '@/lib/content'
+import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function RiverSection() {
   const { river } = getHeadlines()
+  const motionTier = useMotionTier()
+  const motion = getMotionFeatures(motionTier)
   const sectionRef = useRef<HTMLElement>(null)
   const copyRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
@@ -79,7 +82,7 @@ export function RiverSection() {
 
       {/* Water layer — background speed */}
       <ParallaxLayer speed={PARALLAX_RATIOS.riverBg} trigger="#river" zIndex={Z_INDEX.river}>
-        <WaterLayer />
+        <WaterLayer caustics={motion.caustics} />
       </ParallaxLayer>
 
       {/* Foreground reeds and foliage — 0.6x parallax */}

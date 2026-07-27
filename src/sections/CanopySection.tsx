@@ -1,20 +1,16 @@
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { MistLayer } from '@/components/layers/MistLayer'
+import { CanopySwayLayer } from '@/components/layers/CanopySwayLayer'
+import { ParticleField } from '@/components/layers/ParticleField'
 import { ScrollRevealText } from '@/components/text/ScrollRevealText'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
 import { getHeadlines } from '@/lib/content'
-
-const LEAVES = Array.from({ length: 12 }, (_, i) => ({
-  id: i,
-  left: `${8 + (i * 7.5) % 85}%`,
-  top: `${10 + (i * 13) % 70}%`,
-  delay: `${i * 0.7}s`,
-  duration: `${6 + (i % 4) * 2}s`,
-  size: 8 + (i % 3) * 4,
-}))
+import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
 
 export function CanopySection() {
   const { canopy } = getHeadlines()
+  const motionTier = useMotionTier()
+  const motion = getMotionFeatures(motionTier)
 
   return (
     <section
@@ -70,29 +66,13 @@ export function CanopySection() {
         </svg>
       </ParallaxLayer>
 
-      <MistLayer trigger="#canopy" />
+      <MistLayer trigger="#canopy" sheets={motion.mistSheets} />
 
-      {/* Floating leaf particles */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ zIndex: Z_INDEX.particles }}
-        aria-hidden="true"
-      >
-        {LEAVES.map((leaf) => (
-          <div
-            key={leaf.id}
-            className="leaf-float absolute rounded-full bg-wildlife-accent/40"
-            style={{
-              left: leaf.left,
-              top: leaf.top,
-              width: leaf.size,
-              height: leaf.size * 1.5,
-              animationDelay: leaf.delay,
-              animationDuration: leaf.duration,
-            }}
-          />
-        ))}
-      </div>
+      {motion.treeSway && <CanopySwayLayer />}
+
+      {motion.particles && (
+        <ParticleField count={motion.particleCount} color="rgba(61, 139, 90, 0.4)" />
+      )}
 
       <div
         className="relative flex min-h-[120vh] items-center justify-center px-6"

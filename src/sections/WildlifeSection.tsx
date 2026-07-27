@@ -1,26 +1,16 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
+import { BirdLayer } from '@/components/layers/BirdLayer'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
 import { getSectionContent } from '@/lib/content'
+import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
-
-function Bird({ path, className }: { path: string; className?: string }) {
-  return (
-    <svg
-      className={`bird-drift ${className ?? ''}`}
-      viewBox="0 0 60 30"
-      width="60"
-      height="30"
-      aria-hidden="true"
-    >
-      <path d={path} fill="currentColor" />
-    </svg>
-  )
-}
 
 export function WildlifeSection() {
   const { wildlife } = getSectionContent()
+  const motionTier = useMotionTier()
+  const motion = getMotionFeatures(motionTier)
   const sectionRef = useRef<HTMLElement>(null)
   const highlightsRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
@@ -79,18 +69,7 @@ export function WildlifeSection() {
       </ParallaxLayer>
 
       <ParallaxLayer speed={0.25} trigger="#wildlife" zIndex={Z_INDEX.particles}>
-        <Bird
-          path="M5,15 Q15,5 25,15 Q35,25 45,15 Q50,10 55,15 L55,18 Q50,20 45,18 Q35,28 25,18 Q15,8 5,18 Z"
-          className="absolute left-[15%] top-[20%] text-canopy-mist/30"
-        />
-        <Bird
-          path="M5,15 Q15,5 25,15 Q35,25 45,15 Q50,10 55,15 L55,18 Q50,20 45,18 Q35,28 25,18 Q15,8 5,18 Z"
-          className="bird-drift-reverse absolute right-[20%] top-[30%] text-canopy-mist/20"
-        />
-        <Bird
-          path="M5,15 Q15,5 25,15 Q35,25 45,15 Q50,10 55,15 L55,18 Q50,20 45,18 Q35,28 25,18 Q15,8 5,18 Z"
-          className="absolute left-[55%] top-[15%] text-canopy-mist/25"
-        />
+        <BirdLayer enabled={motion.birdFlap} />
       </ParallaxLayer>
 
       <div
