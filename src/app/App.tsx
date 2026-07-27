@@ -3,6 +3,7 @@ import { ScrollHint } from '@/components/ui/ScrollHint'
 import { HeroSection } from '@/sections/HeroSection'
 import { CanopySection } from '@/sections/CanopySection'
 import { RiverSection } from '@/sections/RiverSection'
+import { WildlifeSection } from '@/sections/WildlifeSection'
 import { SectionPlaceholder } from '@/sections/SectionPlaceholder'
 import { SECTION_HEIGHTS } from '@/lib/constants'
 
@@ -15,12 +16,7 @@ export default function App() {
           <HeroSection />
           <CanopySection />
           <RiverSection />
-          <SectionPlaceholder
-            id="wildlife"
-            label="Act 4 — The Wildlife"
-            height={SECTION_HEIGHTS.wildlife}
-            className="-mt-[10vh] bg-gradient-to-b from-canopy-deep to-wildlife-accent/30"
-          />
+          <WildlifeSection />
           <SectionPlaceholder
             id="community"
             label="Act 5 — The People"
