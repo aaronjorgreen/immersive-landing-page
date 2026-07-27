@@ -143,6 +143,19 @@
   animation: leaf-float 8s ease-in-out infinite;
 }
 
+@keyframes water-shimmer {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.water-shimmer {
+  animation: water-shimmer 8s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
