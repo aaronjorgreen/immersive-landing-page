@@ -2,6 +2,7 @@ import { ScrollProvider } from '@/app/ScrollProvider'
 import { ScrollHint } from '@/components/ui/ScrollHint'
 import { HeroSection } from '@/sections/HeroSection'
 import { CanopySection } from '@/sections/CanopySection'
+import { RiverSection } from '@/sections/RiverSection'
 import { SectionPlaceholder } from '@/sections/SectionPlaceholder'
 import { SECTION_HEIGHTS } from '@/lib/constants'
 
@@ -13,12 +14,7 @@ export default function App() {
         <main className="relative">
           <HeroSection />
           <CanopySection />
-          <SectionPlaceholder
-            id="river"
-            label="Act 3 — The River"
-            height={SECTION_HEIGHTS.river}
-            className="-mt-[15vh] bg-gradient-to-b from-river-reed via-river-teal to-river-teal"
-          />
+          <RiverSection />
           <SectionPlaceholder
             id="wildlife"
             label="Act 4 — The Wildlife"
