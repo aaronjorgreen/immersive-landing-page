@@ -4,6 +4,7 @@ import { HeroSection } from '@/sections/HeroSection'
 import { CanopySection } from '@/sections/CanopySection'
 import { RiverSection } from '@/sections/RiverSection'
 import { WildlifeSection } from '@/sections/WildlifeSection'
+import { CommunitySection } from '@/sections/CommunitySection'
 import { SectionPlaceholder } from '@/sections/SectionPlaceholder'
 import { SECTION_HEIGHTS } from '@/lib/constants'
 
@@ -17,12 +18,7 @@ export default function App() {
           <CanopySection />
           <RiverSection />
           <WildlifeSection />
-          <SectionPlaceholder
-            id="community"
-            label="Act 5 — The People"
-            height={SECTION_HEIGHTS.community}
-            className="-mt-[10vh] bg-gradient-to-b from-community-amber/40 to-community-warm/20"
-          />
+          <CommunitySection />
           <SectionPlaceholder
             id="depths"
             label="Act 6 — The Depths"
