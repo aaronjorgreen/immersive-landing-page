@@ -1,36 +1,45 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
-import { Z_INDEX } from '@/lib/constants'
+import { CTA_LABELS, SECTION_IDS, Z_INDEX } from '@/lib/constants'
 import { getHeadlines } from '@/lib/content'
 import { CloudLayer } from '@/components/layers/CloudLayer'
+import { LightRaysLayer } from '@/components/layers/LightRaysLayer'
+import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
+import { Button } from '@/components/ui/Button'
+import { useIsMobile } from '@/hooks/useMediaQuery'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useLenis } from '@/hooks/useScrollProgress'
 
 export function HeroSection() {
   const { hero } = getHeadlines()
+  const isMobile = useIsMobile()
+  const reducedMotion = useReducedMotion()
+  const lenis = useLenis()
   const sectionRef = useRef<HTMLElement>(null)
   const bgRef = useRef<HTMLDivElement>(null)
-  const titleRef = useRef<HTMLHeadingElement>(null)
-  const taglineRef = useRef<HTMLParagraphElement>(null)
-  const reducedMotion = useReducedMotion()
+  const contentRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
+  const headlineLines = isMobile ? hero.mobileLines : hero.lines
+  const pinEnd = isMobile ? '+=60%' : '+=100%'
 
   useEffect(() => {
     const section = sectionRef.current
     const bg = bgRef.current
-    const title = titleRef.current
-    const tagline = taglineRef.current
-    if (!section || !bg || !title || !tagline) return
+    const content = contentRef.current
+    const cta = ctaRef.current
+    if (!section || !bg || !content) return
 
     const ctx = gsap.context(() => {
       if (!reducedMotion) {
         gsap.fromTo(
-          [title, tagline],
+          content,
           { opacity: 0, y: 30, scale: 0.96 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
             duration: 1.4,
-            stagger: 0.2,
             ease: 'power3.out',
             delay: 0.3,
           },
@@ -42,20 +51,48 @@ export function HeroSection() {
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () =>
-              window.innerWidth < 768 ? '+=60%' : '+=100%',
+            end: pinEnd,
             pin: true,
             pinSpacing: true,
             scrub: true,
           },
         })
+
+        if (cta) {
+          gsap.fromTo(
+            cta,
+            { opacity: 0, y: 16, pointerEvents: 'none' },
+            {
+              opacity: 1,
+              y: 0,
+              pointerEvents: 'auto',
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'bottom bottom',
+                end: 'bottom top',
+                scrub: 0.5,
+              },
+            },
+          )
+        }
       } else {
-        gsap.set([title, tagline], { opacity: 1, y: 0, scale: 1 })
+        gsap.set(content, { opacity: 1, y: 0, scale: 1 })
+        if (cta) gsap.set(cta, { opacity: 1, y: 0 })
       }
     }, section)
 
     return () => ctx.revert()
-  }, [reducedMotion])
+  }, [reducedMotion, pinEnd])
+
+  const scrollToExpeditions = () => {
+    const target = document.getElementById(SECTION_IDS.expeditions)
+    if (target && lenis) {
+      lenis.scrollTo(target, { offset: 0 })
+    } else if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <section
@@ -70,9 +107,9 @@ export function HeroSection() {
         style={{ zIndex: Z_INDEX.sky }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#f5dcc0] via-sky-rose/80 to-sky-haze" />
+        <LightRaysLayer trigger="#hero" scrollStart="top top" scrollEnd={pinEnd} />
         <div className="absolute inset-0 bg-gradient-to-t from-canopy-shadow/20 to-transparent" />
-        <CloudLayer className="z-[1]" />
-        {/* Distant treeline silhouette */}
+        <CloudLayer className="z-[1]" planes={4} />
         <svg
           className="absolute bottom-0 left-0 w-full"
           viewBox="0 0 1440 200"
@@ -89,21 +126,26 @@ export function HeroSection() {
       </div>
 
       <div
+        ref={contentRef}
         className="relative flex min-h-[100dvh] flex-col items-center justify-center px-6 text-center"
         style={{ zIndex: Z_INDEX.typography }}
       >
-        <h1
-          ref={titleRef}
-          className="font-display text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-tight text-white/95 text-balance min-h-[1.2em]"
-        >
-          {hero.lines[0]}
-        </h1>
-        <p
-          ref={taglineRef}
-          className="mt-6 max-w-md font-display text-[clamp(1.1rem,3vw,1.5rem)] italic text-white/75"
-        >
-          {hero.lines[hero.lines.length - 1]}
-        </p>
+        <ScrollRotatingHeadline
+          lines={headlineLines}
+          trigger="#hero"
+          scrollStart="top top"
+          scrollEnd={pinEnd}
+          showProgress={headlineLines.length > 1}
+          className="max-w-4xl"
+          lineClassName="font-display text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-tight text-white/95"
+          as="h1"
+        />
+
+        <div ref={ctaRef} className="mt-10">
+          <Button variant="ghost" onClick={scrollToExpeditions}>
+            {CTA_LABELS.viewExpeditions}
+          </Button>
+        </div>
       </div>
     </section>
   )
