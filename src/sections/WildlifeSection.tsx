@@ -1,30 +1,38 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from '@/lib/gsap'
+import { ScrollTrigger } from '@/lib/gsap'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { BirdLayer } from '@/components/layers/BirdLayer'
-import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
-import { getSectionContent } from '@/lib/content'
+import { ExpeditionCard } from '@/components/expedition/ExpeditionCard'
+import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
+import { CTA_LABELS, SECTION_IDS, Z_INDEX } from '@/lib/constants'
+import { getExpeditions } from '@/lib/content'
 import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useLenis } from '@/hooks/useScrollProgress'
 
 export function WildlifeSection() {
-  const { wildlife } = getSectionContent()
+  const expeditions = getExpeditions()
   const motionTier = useMotionTier()
   const motion = getMotionFeatures(motionTier)
+  const lenis = useLenis()
   const sectionRef = useRef<HTMLElement>(null)
-  const highlightsRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const [focusedId, setFocusedId] = useState<string>(expeditions[0]?.id ?? '')
   const reducedMotion = useReducedMotion()
+
+  const headlineLines = expeditions.map((e) => e.name)
 
   useEffect(() => {
     const section = sectionRef.current
-    const highlights = highlightsRef.current
-    if (!section || !highlights || reducedMotion) return
+    const cards = cardsRef.current
+    if (!section || !cards || reducedMotion) return
 
-    const items = highlights.querySelectorAll('[data-highlight]')
+    const cardEls = cards.querySelectorAll('[data-expedition-card]')
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        items,
+        cardEls,
         { opacity: 0, y: 40 },
         {
           opacity: 1,
@@ -39,33 +47,45 @@ export function WildlifeSection() {
           },
         },
       )
+
+      cardEls.forEach((card) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 60%',
+          end: 'bottom 40%',
+          onEnter: () => {
+            const id = card.getAttribute('data-expedition-id')
+            if (id) setFocusedId(id)
+          },
+          onEnterBack: () => {
+            const id = card.getAttribute('data-expedition-id')
+            if (id) setFocusedId(id)
+          },
+        })
+      })
     }, section)
 
     return () => ctx.revert()
-  }, [reducedMotion])
+  }, [reducedMotion, expeditions.length])
+
+  const scrollToExpeditions = () => {
+    const target = document.getElementById(SECTION_IDS.expeditions)
+    if (target && lenis) {
+      lenis.scrollTo(target)
+    } else if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <section
       ref={sectionRef}
       id="wildlife"
       aria-label="The Wildlife"
-      className="relative -mt-[15vh] min-h-[100vh] overflow-hidden"
+      className="relative -mt-[15vh] min-h-[120vh] overflow-hidden"
     >
-      <ParallaxLayer speed={PARALLAX_RATIOS.slow} trigger="#wildlife" zIndex={Z_INDEX.canopy}>
+      <ParallaxLayer speed={0.1} trigger="#wildlife" zIndex={Z_INDEX.canopy}>
         <div className="absolute inset-0 bg-gradient-to-b from-canopy-deep to-[#1a4a2a]" />
-      </ParallaxLayer>
-
-      <ParallaxLayer speed={PARALLAX_RATIOS.medium} trigger="#wildlife" zIndex={Z_INDEX.canopy + 1}>
-        <svg
-          className="absolute bottom-0 left-0 w-full opacity-50"
-          viewBox="0 0 1440 300"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <circle cx="200" cy="180" r="80" fill="#2a5a3a" opacity="0.4" />
-          <circle cx="600" cy="200" r="100" fill="#3d8b5a" opacity="0.3" />
-          <circle cx="1000" cy="170" r="90" fill="#2a5a3a" opacity="0.35" />
-        </svg>
       </ParallaxLayer>
 
       <ParallaxLayer speed={0.25} trigger="#wildlife" zIndex={Z_INDEX.particles}>
@@ -73,20 +93,39 @@ export function WildlifeSection() {
       </ParallaxLayer>
 
       <div
-        ref={highlightsRef}
-        className="relative mx-auto flex min-h-[100vh] max-w-3xl flex-col justify-center gap-10 px-6 py-20"
+        className="relative mx-auto flex min-h-[120vh] max-w-5xl flex-col justify-center px-6 py-20"
         style={{ zIndex: Z_INDEX.typography }}
       >
-        {wildlife.highlights.map((item) => (
-          <div key={item.title} data-highlight className="border-l-2 border-wildlife-accent/50 pl-6">
-            <h3 className="font-display text-[clamp(1.4rem,3vw,2rem)] text-canopy-mist/90">
-              {item.title}
-            </h3>
-            <p className="mt-2 font-sans text-sm leading-relaxed text-canopy-mist/60 md:text-base">
-              {item.text}
-            </p>
-          </div>
-        ))}
+        <ScrollRotatingHeadline
+          lines={headlineLines}
+          trigger="#wildlife"
+          scrollStart="top 65%"
+          scrollEnd="bottom 35%"
+          className="mb-12 text-center"
+          lineClassName="font-display text-[clamp(1.8rem,5vw,3.5rem)] text-canopy-mist/90"
+          as="h2"
+        />
+
+        <div ref={cardsRef} className="grid gap-6 md:grid-cols-3">
+          {expeditions.map((expedition) => (
+            <ExpeditionCard
+              key={expedition.id}
+              expedition={expedition}
+              focused={focusedId === expedition.id}
+              compact
+            />
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <button
+            type="button"
+            onClick={scrollToExpeditions}
+            className="font-sans text-sm text-arrival-gold/70 transition-colors hover:text-arrival-gold"
+          >
+            {CTA_LABELS.compareExpeditions}
+          </button>
+        </div>
       </div>
     </section>
   )

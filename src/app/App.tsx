@@ -4,6 +4,7 @@ import { HeroSection } from '@/sections/HeroSection'
 import { CanopySection } from '@/sections/CanopySection'
 import { RiverSection } from '@/sections/RiverSection'
 import { WildlifeSection } from '@/sections/WildlifeSection'
+import { ExpeditionsSection } from '@/sections/ExpeditionsSection'
 import { CommunitySection } from '@/sections/CommunitySection'
 import { DepthsSection } from '@/sections/DepthsSection'
 import { CTASection } from '@/sections/CTASection'
@@ -19,6 +20,7 @@ export default function App() {
           <div className="section-lazy">
             <RiverSection />
             <WildlifeSection />
+            <ExpeditionsSection />
             <CommunitySection />
             <DepthsSection />
             <CTASection />
