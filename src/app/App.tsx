@@ -1,5 +1,6 @@
 import { ScrollProvider } from '@/app/ScrollProvider'
 import { ScrollHint } from '@/components/ui/ScrollHint'
+import { MiniNav } from '@/components/ui/MiniNav'
 import { HeroSection } from '@/sections/HeroSection'
 import { CanopySection } from '@/sections/CanopySection'
 import { RiverSection } from '@/sections/RiverSection'
@@ -14,6 +15,7 @@ export default function App() {
     <ScrollProvider>
       <div className="relative overflow-x-hidden">
         <ScrollHint />
+        <MiniNav />
         <main className="relative">
           <HeroSection />
           <CanopySection />
