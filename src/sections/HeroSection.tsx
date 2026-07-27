@@ -91,7 +91,7 @@ export function HeroSection() {
       >
         <h1
           ref={titleRef}
-          className="font-display text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-tight text-white/95 text-balance"
+          className="font-display text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-tight text-white/95 text-balance min-h-[1.2em]"
         >
           {BRAND.name}
         </h1>
