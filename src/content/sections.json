@@ -1,0 +1,29 @@
+{
+  "wildlife": {
+    "highlights": [
+      {
+        "title": "River journeys",
+        "text": "Three to fourteen days on the Rio Negro. Dawn mist. Night sounds."
+      },
+      {
+        "title": "Canopy walks",
+        "text": "Walk the green cathedral. Look down on a world that never sleeps."
+      },
+      {
+        "title": "Wildlife photography",
+        "text": "Patience rewarded. Pink dolphins. Toucans. The river at its quietest."
+      }
+    ]
+  },
+  "community": {
+    "operatingSince": 2008,
+    "pledge": "We operate with local partners, fair wages, and a commitment to leave every community better than we found it."
+  },
+  "cta": {
+    "formPlaceholders": {
+      "name": "Your name",
+      "email": "you@example.com",
+      "message": "Tell us about your dream expedition..."
+    }
+  }
+}

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "rio-negro-dawn",
+    "slug": "rio-negro-dawn",
+    "name": "Rio Negro Dawn",
+    "durationDays": [3, 5],
+    "priceFrom": 2400,
+    "currency": "USD",
+    "season": ["May", "Jun", "Jul", "Aug", "Sep"],
+    "groupSize": [4, 8],
+    "difficulty": "gentle",
+    "highlights": [
+      "First light on black water",
+      "Dawn mist and night sounds",
+      "Pink dolphin encounters"
+    ],
+    "includes": [
+      "Shared cabin accommodation",
+      "All meals aboard",
+      "Licensed local guide",
+      "River permits"
+    ]
+  },
+  {
+    "id": "canopy-current",
+    "slug": "canopy-current",
+    "name": "Canopy & Current",
+    "durationDays": [7, 10],
+    "priceFrom": 4800,
+    "currency": "USD",
+    "season": ["May", "Jun", "Jul", "Aug", "Sep"],
+    "groupSize": [4, 10],
+    "difficulty": "moderate",
+    "highlights": [
+      "Treetop canopy walks",
+      "Black-water night navigation",
+      "Wildlife photography sessions"
+    ],
+    "includes": [
+      "Shared cabin accommodation",
+      "All meals and snacks",
+      "Licensed local guide",
+      "Canopy walk permits",
+      "Photography briefing"
+    ]
+  },
+  {
+    "id": "full-basin-immersion",
+    "slug": "full-basin-immersion",
+    "name": "Full Basin Immersion",
+    "durationDays": [12, 14],
+    "priceFrom": 7200,
+    "currency": "USD",
+    "season": ["Jun", "Jul", "Aug"],
+    "groupSize": [4, 8],
+    "difficulty": "immersive",
+    "highlights": [
+      "The complete descent from sky to riverbed",
+      "Community visits with local hosts",
+      "Extended black-water exploration"
+    ],
+    "includes": [
+      "Shared cabin accommodation",
+      "All meals and beverages",
+      "Two licensed guides",
+      "All permits and community fees",
+      "Itinerary PDF and pre-trip briefing"
+    ]
+  }
+]

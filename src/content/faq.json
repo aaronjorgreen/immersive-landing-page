@@ -1,0 +1,27 @@
+[
+  {
+    "id": "visa",
+    "question": "Do I need a visa for Brazil?",
+    "answer": "Most visitors from the US, EU, UK, and Canada do not need a visa for stays under 90 days. Check current requirements for your nationality before booking."
+  },
+  {
+    "id": "fitness",
+    "question": "What fitness level is required?",
+    "answer": "Our gentle expeditions require basic mobility. Moderate journeys include canopy walks and longer river days. We provide a detailed fitness guide with your itinerary."
+  },
+  {
+    "id": "packing",
+    "question": "What should I pack?",
+    "answer": "Lightweight long sleeves, insect repellent, waterproof bag, and neutral-coloured clothing. We send a full packing list after booking."
+  },
+  {
+    "id": "cancellation",
+    "question": "What is your cancellation policy?",
+    "answer": "Full refund up to 60 days before departure. 50% refund 30–60 days. Within 30 days, deposits are transferable to a future season."
+  },
+  {
+    "id": "season",
+    "question": "When is the best time to visit?",
+    "answer": "May through September offers the best water levels and wildlife activity on the Rio Negro. Limited departures each season."
+  }
+]

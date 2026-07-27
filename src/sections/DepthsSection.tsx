@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
+import { getHeadlines } from '@/lib/content'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const FIREFLIES = Array.from({ length: 18 }, (_, i) => ({
@@ -13,6 +14,7 @@ const FIREFLIES = Array.from({ length: 18 }, (_, i) => ({
 }))
 
 export function DepthsSection() {
+  const { depths } = getHeadlines()
   const sectionRef = useRef<HTMLElement>(null)
   const copyRef = useRef<HTMLHeadingElement>(null)
   const reducedMotion = useReducedMotion()
@@ -93,7 +95,7 @@ export function DepthsSection() {
           ref={copyRef}
           className="font-display text-[clamp(2.2rem,6vw,4.5rem)] italic text-depths-glow/80 text-balance text-center"
         >
-          The river remembers.
+          {depths.lines[0]}
         </h2>
       </div>
     </section>

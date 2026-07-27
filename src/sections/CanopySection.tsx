@@ -2,6 +2,7 @@ import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { MistLayer } from '@/components/layers/MistLayer'
 import { ScrollRevealText } from '@/components/text/ScrollRevealText'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
+import { getHeadlines } from '@/lib/content'
 
 const LEAVES = Array.from({ length: 12 }, (_, i) => ({
   id: i,
@@ -13,6 +14,8 @@ const LEAVES = Array.from({ length: 12 }, (_, i) => ({
 }))
 
 export function CanopySection() {
+  const { canopy } = getHeadlines()
+
   return (
     <section
       id="canopy"
@@ -97,7 +100,7 @@ export function CanopySection() {
       >
         <ScrollRevealText animation="fadeUp" trigger="#canopy">
           <h2 className="font-display text-[clamp(2rem,6vw,4rem)] text-canopy-mist text-balance text-center">
-            Descend into the green.
+            {canopy.lines[0]}
           </h2>
         </ScrollRevealText>
       </div>

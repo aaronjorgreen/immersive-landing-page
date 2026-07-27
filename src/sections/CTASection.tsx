@@ -2,9 +2,12 @@ import { useEffect, useRef, type FormEvent } from 'react'
 import { gsap } from '@/lib/gsap'
 import { Button } from '@/components/ui/Button'
 import { BRAND, Z_INDEX } from '@/lib/constants'
+import { getHeadlines, getSectionContent } from '@/lib/content'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function CTASection() {
+  const { arrival } = getHeadlines()
+  const { cta } = getSectionContent()
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
@@ -68,10 +71,10 @@ export function CTASection() {
         style={{ zIndex: Z_INDEX.typography }}
       >
         <h2 className="font-display text-[clamp(2.5rem,7vw,4.5rem)] text-arrival-gold text-balance text-center">
-          {BRAND.cta}
+          {arrival.headline}
         </h2>
         <p className="mt-4 max-w-md text-center font-sans text-base text-arrival-gold/60">
-          Your journey into the Amazon begins with a single step. Tell us where you want to go.
+          {arrival.subhead}
         </p>
 
         <form
@@ -90,7 +93,7 @@ export function CTASection() {
               required
               autoComplete="name"
               className="w-full border-b border-arrival-gold/30 bg-transparent px-0 py-3 font-sans text-arrival-gold placeholder:text-arrival-gold/30 focus:border-arrival-gold focus:outline-none"
-              placeholder="Your name"
+              placeholder={cta.formPlaceholders.name}
             />
           </div>
           <div>
@@ -104,7 +107,7 @@ export function CTASection() {
               required
               autoComplete="email"
               className="w-full border-b border-arrival-gold/30 bg-transparent px-0 py-3 font-sans text-arrival-gold placeholder:text-arrival-gold/30 focus:border-arrival-gold focus:outline-none"
-              placeholder="you@example.com"
+              placeholder={cta.formPlaceholders.email}
             />
           </div>
           <div>
@@ -116,7 +119,7 @@ export function CTASection() {
               name="message"
               rows={3}
               className="w-full resize-none border-b border-arrival-gold/30 bg-transparent px-0 py-3 font-sans text-arrival-gold placeholder:text-arrival-gold/30 focus:border-arrival-gold focus:outline-none"
-              placeholder="Tell us about your dream expedition..."
+              placeholder={cta.formPlaceholders.message}
             />
           </div>
           <div className="pt-4 text-center">

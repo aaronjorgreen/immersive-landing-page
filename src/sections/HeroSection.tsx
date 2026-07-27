@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
-import { BRAND, Z_INDEX } from '@/lib/constants'
+import { Z_INDEX } from '@/lib/constants'
+import { getHeadlines } from '@/lib/content'
 import { CloudLayer } from '@/components/layers/CloudLayer'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function HeroSection() {
+  const { hero } = getHeadlines()
   const sectionRef = useRef<HTMLElement>(null)
   const bgRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -94,13 +96,13 @@ export function HeroSection() {
           ref={titleRef}
           className="font-display text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-tight text-white/95 text-balance min-h-[1.2em]"
         >
-          {BRAND.name}
+          {hero.lines[0]}
         </h1>
         <p
           ref={taglineRef}
           className="mt-6 max-w-md font-display text-[clamp(1.1rem,3vw,1.5rem)] italic text-white/75"
         >
-          {BRAND.tagline}
+          {hero.lines[hero.lines.length - 1]}
         </p>
       </div>
     </section>

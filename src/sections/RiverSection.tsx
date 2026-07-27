@@ -3,9 +3,11 @@ import { gsap } from '@/lib/gsap'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { WaterLayer } from '@/components/layers/WaterLayer'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
+import { getHeadlines } from '@/lib/content'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function RiverSection() {
+  const { river } = getHeadlines()
   const sectionRef = useRef<HTMLElement>(null)
   const copyRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
@@ -118,7 +120,7 @@ export function RiverSection() {
         style={{ zIndex: Z_INDEX.typography }}
       >
         <h2 className="max-w-md font-display text-[clamp(1.8rem,5vw,3.5rem)] text-river-silver/90 text-balance text-center md:text-right">
-          The river carries everything.
+          {river.lines[0]}
         </h2>
       </div>
     </section>

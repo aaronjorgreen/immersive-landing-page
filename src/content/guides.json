@@ -1,0 +1,18 @@
+[
+  {
+    "id": "maria-silva",
+    "name": "Maria Silva",
+    "role": "Lead River Guide",
+    "yearsExperience": 18,
+    "bio": "Born on the Rio Negro. Maria reads the water like a language — currents, seasons, and the quiet places where dolphins surface at dawn.",
+    "credentials": ["Licensed Amazon guide", "Wildlife photography specialist"]
+  },
+  {
+    "id": "carlos-mendes",
+    "name": "Carlos Mendes",
+    "role": "Canopy & Community Guide",
+    "yearsExperience": 12,
+    "bio": "Carlos bridges forest and river. He leads canopy walks and community visits with the patience of someone who grew up between both worlds.",
+    "credentials": ["Certified canopy guide", "Community liaison"]
+  }
+]
