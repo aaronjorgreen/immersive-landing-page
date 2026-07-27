@@ -5,6 +5,7 @@ import { CanopySection } from '@/sections/CanopySection'
 import { RiverSection } from '@/sections/RiverSection'
 import { WildlifeSection } from '@/sections/WildlifeSection'
 import { CommunitySection } from '@/sections/CommunitySection'
+import { DepthsSection } from '@/sections/DepthsSection'
 import { SectionPlaceholder } from '@/sections/SectionPlaceholder'
 import { SECTION_HEIGHTS } from '@/lib/constants'
 
@@ -19,12 +20,7 @@ export default function App() {
           <RiverSection />
           <WildlifeSection />
           <CommunitySection />
-          <SectionPlaceholder
-            id="depths"
-            label="Act 6 — The Depths"
-            height={SECTION_HEIGHTS.depths}
-            className="-mt-[10vh] bg-depths-indigo"
-          />
+          <DepthsSection />
           <SectionPlaceholder
             id="arrival"
             label="Act 7 — The Arrival"
