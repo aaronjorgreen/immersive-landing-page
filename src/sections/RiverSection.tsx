@@ -2,15 +2,18 @@ import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { WaterLayer } from '@/components/layers/WaterLayer'
-import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
+import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
+import { CTA_LABELS, PARALLAX_RATIOS, SECTION_IDS, Z_INDEX } from '@/lib/constants'
 import { getHeadlines } from '@/lib/content'
 import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useLenis } from '@/hooks/useScrollProgress'
 
 export function RiverSection() {
   const { river } = getHeadlines()
   const motionTier = useMotionTier()
   const motion = getMotionFeatures(motionTier)
+  const lenis = useLenis()
   const sectionRef = useRef<HTMLElement>(null)
   const copyRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
@@ -38,8 +41,8 @@ export function RiverSection() {
       )
 
       gsap.to(copy, {
-        opacity: 0,
-        scale: 0.92,
+        opacity: 0.6,
+        scale: 0.96,
         ease: 'power2.in',
         scrollTrigger: {
           trigger: section,
@@ -53,6 +56,15 @@ export function RiverSection() {
     return () => ctx.revert()
   }, [reducedMotion])
 
+  const scrollToExpeditions = () => {
+    const target = document.getElementById(SECTION_IDS.expeditions)
+    if (target && lenis) {
+      lenis.scrollTo(target)
+    } else if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -60,7 +72,6 @@ export function RiverSection() {
       aria-label="The River"
       className="relative -mt-[20vh] min-h-[150vh] overflow-hidden"
     >
-      {/* Background — 0.15x parallax */}
       <ParallaxLayer
         speed={PARALLAX_RATIOS.riverBg}
         trigger="#river"
@@ -80,12 +91,10 @@ export function RiverSection() {
         </svg>
       </ParallaxLayer>
 
-      {/* Water layer — background speed */}
       <ParallaxLayer speed={PARALLAX_RATIOS.riverBg} trigger="#river" zIndex={Z_INDEX.river}>
         <WaterLayer caustics={motion.caustics} />
       </ParallaxLayer>
 
-      {/* Foreground reeds and foliage — 0.6x parallax */}
       <ParallaxLayer
         speed={PARALLAX_RATIOS.riverFg}
         trigger="#river"
@@ -119,12 +128,25 @@ export function RiverSection() {
 
       <div
         ref={copyRef}
-        className="relative flex min-h-[150vh] items-center justify-center px-6 md:justify-end md:px-16"
+        className="relative flex min-h-[150vh] flex-col items-center justify-center gap-8 px-6 md:items-end md:px-16"
         style={{ zIndex: Z_INDEX.typography }}
       >
-        <h2 className="max-w-md font-display text-[clamp(1.8rem,5vw,3.5rem)] text-river-silver/90 text-balance text-center md:text-right">
-          {river.lines[0]}
-        </h2>
+        <ScrollRotatingHeadline
+          lines={river.lines}
+          trigger="#river"
+          scrollStart="top 55%"
+          scrollEnd="bottom 45%"
+          className="max-w-md text-center md:text-right"
+          lineClassName="font-display text-[clamp(1.8rem,5vw,3.5rem)] text-river-silver/90"
+          as="h2"
+        />
+        <button
+          type="button"
+          onClick={scrollToExpeditions}
+          className="font-sans text-sm text-river-silver/60 transition-colors hover:text-river-silver/90"
+        >
+          {CTA_LABELS.seeJourneyOptions}
+        </button>
       </div>
     </section>
   )

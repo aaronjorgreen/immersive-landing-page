@@ -2,42 +2,30 @@ import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { FireflyLayer } from '@/components/layers/FireflyLayer'
+import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
-import { getHeadlines } from '@/lib/content'
+import { getHeadlines, getTestimonials } from '@/lib/content'
 import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function DepthsSection() {
   const { depths } = getHeadlines()
+  const testimonials = getTestimonials()
   const motionTier = useMotionTier()
   const motion = getMotionFeatures(motionTier)
   const sectionRef = useRef<HTMLElement>(null)
-  const copyRef = useRef<HTMLHeadingElement>(null)
   const reducedMotion = useReducedMotion()
+
+  const testimonialLines = [
+    depths.lines[0],
+    ...testimonials.map((t) => `"${t.quote}" — ${t.author}`),
+  ]
 
   useEffect(() => {
     const section = sectionRef.current
-    const copy = copyRef.current
-    if (!section || !copy || reducedMotion) return
+    if (!section || reducedMotion) return
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        copy,
-        { opacity: 0, scale: 0.95 },
-        {
-          opacity: 1,
-          scale: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 60%',
-            end: 'center center',
-            scrub: 1,
-          },
-        },
-      )
-    }, section)
-
+    const ctx = gsap.context(() => {}, section)
     return () => ctx.revert()
   }, [reducedMotion])
 
@@ -46,7 +34,7 @@ export function DepthsSection() {
       ref={sectionRef}
       id="depths"
       aria-label="The Depths"
-      className="relative -mt-[10vh] min-h-[80vh] overflow-hidden bg-depths-indigo"
+      className="relative -mt-[10vh] min-h-[90vh] overflow-hidden bg-depths-indigo"
     >
       <ParallaxLayer speed={PARALLAX_RATIOS.depths} trigger="#depths" zIndex={Z_INDEX.sky}>
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a1018] to-depths-indigo" />
@@ -62,18 +50,21 @@ export function DepthsSection() {
         aria-hidden="true"
       />
 
-      <FireflyLayer count={motion.particleCount > 0 ? 18 : 12} motionPaths={motion.fireflyPaths} />
+      <FireflyLayer count={18} motionPaths={motion.fireflyPaths} />
 
       <div
-        className="relative flex min-h-[80vh] items-center justify-center px-6"
+        className="relative flex min-h-[90vh] items-center justify-center px-6"
         style={{ zIndex: Z_INDEX.typography }}
       >
-        <h2
-          ref={copyRef}
-          className="font-display text-[clamp(2.2rem,6vw,4.5rem)] italic text-depths-glow/80 text-balance text-center"
-        >
-          {depths.lines[0]}
-        </h2>
+        <ScrollRotatingHeadline
+          lines={testimonialLines}
+          trigger="#depths"
+          scrollStart="top 60%"
+          scrollEnd="bottom 40%"
+          className="max-w-3xl text-center"
+          lineClassName="font-display text-[clamp(1.6rem,5vw,3.5rem)] italic text-depths-glow/80"
+          as="h2"
+        />
       </div>
     </section>
   )
