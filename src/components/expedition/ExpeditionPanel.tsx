@@ -17,6 +17,9 @@ export function ExpeditionPanel({ expedition, open, onClose }: ExpeditionPanelPr
   useEffect(() => {
     if (!open) return
 
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    panelRef.current?.focus()
+
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
@@ -27,6 +30,7 @@ export function ExpeditionPanel({ expedition, open, onClose }: ExpeditionPanelPr
     return () => {
       document.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
+      previouslyFocused?.focus()
     }
   }, [open, onClose])
 
@@ -48,7 +52,8 @@ export function ExpeditionPanel({ expedition, open, onClose }: ExpeditionPanelPr
 
       <div
         ref={panelRef}
-        className={`relative ml-auto flex h-full flex-col overflow-y-auto bg-canopy-shadow/95 p-8 shadow-2xl ${
+        tabIndex={-1}
+        className={`relative ml-auto flex h-full flex-col overflow-y-auto bg-canopy-shadow/95 p-8 shadow-2xl outline-none ${
           isMobile ? 'w-full' : 'w-full max-w-md'
         }`}
       >

@@ -41,7 +41,7 @@ export function ExpeditionCard({
 
       <ul className="mt-4 space-y-2">
         {expedition.highlights.map((highlight) => (
-          <li key={highlight} className="font-sans text-sm text-canopy-mist/60">
+            <li key={highlight} className="font-sans text-sm text-canopy-mist/75">
             {highlight}
           </li>
         ))}
