@@ -1,6 +1,8 @@
 import { ScrollProvider } from '@/app/ScrollProvider'
+import { AnalyticsProvider } from '@/app/AnalyticsProvider'
 import { ScrollHint } from '@/components/ui/ScrollHint'
 import { MiniNav } from '@/components/ui/MiniNav'
+import { StructuredData } from '@/components/seo/StructuredData'
 import { HeroSection } from '@/sections/HeroSection'
 import { CanopySection } from '@/sections/CanopySection'
 import { RiverSection } from '@/sections/RiverSection'
@@ -13,7 +15,9 @@ import { CTASection } from '@/sections/CTASection'
 export default function App() {
   return (
     <ScrollProvider>
-      <div className="relative overflow-x-hidden">
+      <AnalyticsProvider>
+        <StructuredData />
+        <div className="relative overflow-x-hidden">
         <ScrollHint />
         <MiniNav />
         <main className="relative">
@@ -28,7 +32,8 @@ export default function App() {
             <CTASection />
           </div>
         </main>
-      </div>
+        </div>
+      </AnalyticsProvider>
     </ScrollProvider>
   )
 }
