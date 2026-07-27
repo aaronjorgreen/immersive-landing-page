@@ -127,6 +127,22 @@
   animation: cloud-drift-slow 45s ease-in-out infinite alternate;
 }
 
+@keyframes leaf-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-30px) rotate(15deg);
+    opacity: 0.6;
+  }
+}
+
+.leaf-float {
+  animation: leaf-float 8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
