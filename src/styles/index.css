@@ -156,6 +156,50 @@
   animation: water-shimmer 8s linear infinite;
 }
 
+@keyframes bird-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(40px, -15px);
+  }
+}
+
+@keyframes bird-drift-reverse {
+  0%,
+  100% {
+    transform: translate(0, 0) scaleX(-1);
+  }
+  50% {
+    transform: translate(-30px, -10px) scaleX(-1);
+  }
+}
+
+@keyframes firefly {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+}
+
+.bird-drift {
+  animation: bird-drift 20s ease-in-out infinite;
+}
+
+.bird-drift-reverse {
+  animation: bird-drift-reverse 25s ease-in-out infinite;
+}
+
+.firefly {
+  animation: firefly 4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
