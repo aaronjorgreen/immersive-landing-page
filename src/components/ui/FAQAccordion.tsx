@@ -27,7 +27,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
               aria-expanded={isOpen}
               aria-controls={`faq-panel-${item.id}`}
               onClick={() => toggle(item.id)}
-              className="flex w-full items-center justify-between py-4 text-left font-sans text-sm text-arrival-gold/80 transition-colors hover:text-arrival-gold"
+              className="flex w-full items-center justify-between py-4 text-left font-sans text-sm text-arrival-gold/80 transition-colors hover:text-arrival-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-arrival-gold/50"
             >
               {item.question}
               <span className="ml-4 text-arrival-gold/40" aria-hidden="true">

@@ -19,10 +19,16 @@ export default function App() {
       <MotionProvider>
       <AnalyticsProvider>
         <StructuredData />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-sm focus:bg-arrival-gold focus:px-4 focus:py-2 focus:font-sans focus:text-sm focus:text-depths-indigo"
+        >
+          Skip to main content
+        </a>
         <div className="relative overflow-x-hidden">
         <ScrollHint />
         <MiniNav />
-        <main className="relative">
+        <main id="main-content" className="relative">
           <HeroSection />
           <CanopySection />
           <div className="section-lazy">
