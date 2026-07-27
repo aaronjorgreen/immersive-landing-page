@@ -1,10 +1,29 @@
-# Immersive Landing Page
+# Selva Viva Expeditions
 
 A scroll-driven cinematic landing page for **Selva Viva Expeditions** — a fictional Amazonian travel company. Visitors descend from sky to river as scroll controls the camera.
 
-## Status
+## Quick Start
 
-Planning complete. Implementation not yet started.
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Tech Stack
+
+- **Vite** + **React** + **TypeScript**
+- **Tailwind CSS** with CSS custom properties for the colour story
+- **GSAP** + **ScrollTrigger** for scroll cinematics
+- **Lenis** for smooth scroll
 
 ## Documentation
 

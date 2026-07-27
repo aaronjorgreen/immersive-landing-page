@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colour story — light → shadow → warm return */
+  --color-sky-dawn: #e8c9a0;
+  --color-sky-rose: #d4a5a5;
+  --color-sky-haze: #8ba4b8;
+
+  --color-canopy-deep: #1a3d2e;
+  --color-canopy-mist: rgba(240, 248, 245, 0.85);
+  --color-canopy-shadow: #0f2419;
+
+  --color-river-teal: #2a6b6b;
+  --color-river-silver: #b8cdd4;
+  --color-river-reed: #4a6741;
+
+  --color-wildlife-accent: #3d8b5a;
+
+  --color-community-amber: #c9956a;
+  --color-community-warm: #e8b88a;
+
+  --color-depths-indigo: #0d1520;
+  --color-depths-glow: #4fd1c5;
+
+  --color-arrival-teal: #2a6b6b;
+  --color-arrival-gold: #e8c9a0;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Spacing */
+  --spacing-section: clamp(4rem, 12vh, 8rem);
+
+  /* Z-index stack (back → front) */
+  --z-sky: 0;
+  --z-treeline: 10;
+  --z-canopy: 20;
+  --z-mist: 30;
+  --z-river: 40;
+  --z-foliage: 50;
+  --z-particles: 60;
+  --z-typography: 70;
+  --z-chrome: 80;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow-x: hidden;
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: var(--color-sky-dawn);
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
