@@ -1,18 +1,16 @@
 import { ScrollProvider } from '@/app/ScrollProvider'
-import { SECTION_HEIGHTS } from '@/lib/constants'
+import { ScrollHint } from '@/components/ui/ScrollHint'
+import { HeroSection } from '@/sections/HeroSection'
 import { SectionPlaceholder } from '@/sections/SectionPlaceholder'
+import { SECTION_HEIGHTS } from '@/lib/constants'
 
 export default function App() {
   return (
     <ScrollProvider>
       <div className="relative overflow-x-hidden">
+        <ScrollHint />
         <main className="relative">
-          <SectionPlaceholder
-            id="hero"
-            label="Act 1 — The Sky"
-            height={SECTION_HEIGHTS.hero}
-            className="bg-gradient-to-b from-sky-dawn via-sky-rose to-sky-haze"
-          />
+          <HeroSection />
           <SectionPlaceholder
             id="canopy"
             label="Act 2 — The Canopy"
