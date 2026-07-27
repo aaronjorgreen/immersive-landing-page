@@ -1,5 +1,5 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary' | 'ghost'
   children: React.ReactNode
 }
 
@@ -17,6 +17,8 @@ export function Button({
       'bg-arrival-gold/90 text-depths-indigo hover:bg-arrival-gold hover:scale-[1.02]',
     secondary:
       'border border-arrival-gold/40 text-arrival-gold/80 hover:border-arrival-gold hover:text-arrival-gold',
+    ghost:
+      'border border-white/25 text-white/70 hover:border-white/50 hover:text-white/90 backdrop-blur-sm bg-white/5',
   }
 
   return (
