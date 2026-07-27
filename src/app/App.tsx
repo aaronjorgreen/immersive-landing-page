@@ -16,11 +16,14 @@ export default function App() {
         <main className="relative">
           <HeroSection />
           <CanopySection />
-          <RiverSection />
-          <WildlifeSection />
-          <CommunitySection />
-          <DepthsSection />
-          <CTASection />
+          <CanopySection />
+          <div className="section-lazy">
+            <RiverSection />
+            <WildlifeSection />
+            <CommunitySection />
+            <DepthsSection />
+            <CTASection />
+          </div>
         </main>
       </div>
     </ScrollProvider>

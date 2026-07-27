@@ -57,7 +57,7 @@ export function ParallaxLayer({
   return (
     <div
       ref={layerRef}
-      className={`pointer-events-none absolute inset-0 ${className}`}
+      className={`pointer-events-none absolute inset-0 will-change-transform ${className}`}
       style={{ zIndex, ...style }}
       aria-hidden="true"
     >

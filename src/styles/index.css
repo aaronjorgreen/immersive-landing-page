@@ -83,6 +83,11 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .section-lazy {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100vh;
+  }
 }
 
 @keyframes scroll-hint {
