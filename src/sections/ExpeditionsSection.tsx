@@ -5,7 +5,9 @@ import { ExpeditionCard } from '@/components/expedition/ExpeditionCard'
 import { ExpeditionPanel } from '@/components/expedition/ExpeditionPanel'
 import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
 import { Z_INDEX } from '@/lib/constants'
+import { ANALYTICS_EVENTS } from '@/lib/constants'
 import { getExpeditions, getHeadlines, type Expedition } from '@/lib/content'
+import { trackEvent } from '@/lib/analytics'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function ExpeditionsSection() {
@@ -35,7 +37,10 @@ export function ExpeditionsSection() {
           end: 'bottom 45%',
           onEnter: () => {
             const id = card.getAttribute('data-expedition-id')
-            if (id) setFocusedId(id)
+            if (id) {
+              setFocusedId(id)
+              trackEvent(ANALYTICS_EVENTS.expeditionCardFocus, { expeditionId: id })
+            }
           },
           onEnterBack: () => {
             const id = card.getAttribute('data-expedition-id')
