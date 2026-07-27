@@ -17,7 +17,7 @@ export function ScrollHint() {
 
   return (
     <div
-      className="fixed bottom-8 left-1/2 z-chrome -translate-x-1/2 pb-[env(safe-area-inset-bottom)]"
+      className="fixed bottom-8 left-1/2 z-chrome -translate-x-1/2 px-4 pb-[max(2rem,env(safe-area-inset-bottom))]"
       aria-hidden="true"
     >
       <div

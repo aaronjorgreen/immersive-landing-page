@@ -3,6 +3,7 @@ import Lenis from 'lenis'
 import { ScrollTrigger } from '@/lib/gsap'
 import { ScrollContext } from '@/app/ScrollContext'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { BREAKPOINTS } from '@/lib/constants'
 
 interface ScrollProviderProps {
   children: ReactNode
@@ -30,12 +31,14 @@ export function ScrollProvider({ children }: ScrollProviderProps) {
       return
     }
 
+    const isMobile = window.innerWidth < BREAKPOINTS.mobile
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isMobile ? 1.0 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      touchMultiplier: isMobile ? 2.0 : 1.5,
     })
 
     setLenisInstance(lenis)
