@@ -5,12 +5,11 @@ import { ParticleField } from '@/components/layers/ParticleField'
 import { ScrollRevealText } from '@/components/text/ScrollRevealText'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
 import { getHeadlines } from '@/lib/content'
-import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
+import { useMotionFeatures } from '@/app/MotionProvider'
 
 export function CanopySection() {
   const { canopy } = getHeadlines()
-  const motionTier = useMotionTier()
-  const motion = getMotionFeatures(motionTier)
+  const motion = useMotionFeatures()
 
   return (
     <section

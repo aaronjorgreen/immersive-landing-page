@@ -7,14 +7,13 @@ import { ExpeditionCard } from '@/components/expedition/ExpeditionCard'
 import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
 import { CTA_LABELS, SECTION_IDS, Z_INDEX } from '@/lib/constants'
 import { getExpeditions } from '@/lib/content'
-import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
+import { useMotionFeatures } from '@/app/MotionProvider'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { useLenis } from '@/hooks/useScrollProgress'
 
 export function WildlifeSection() {
   const expeditions = getExpeditions()
-  const motionTier = useMotionTier()
-  const motion = getMotionFeatures(motionTier)
+  const motion = useMotionFeatures()
   const lenis = useLenis()
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)

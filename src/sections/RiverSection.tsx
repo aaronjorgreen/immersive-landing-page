@@ -5,14 +5,13 @@ import { WaterLayer } from '@/components/layers/WaterLayer'
 import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
 import { CTA_LABELS, PARALLAX_RATIOS, SECTION_IDS, Z_INDEX } from '@/lib/constants'
 import { getHeadlines } from '@/lib/content'
-import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
+import { useMotionFeatures } from '@/app/MotionProvider'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { useLenis } from '@/hooks/useScrollProgress'
 
 export function RiverSection() {
   const { river } = getHeadlines()
-  const motionTier = useMotionTier()
-  const motion = getMotionFeatures(motionTier)
+  const motion = useMotionFeatures()
   const lenis = useLenis()
   const sectionRef = useRef<HTMLElement>(null)
   const copyRef = useRef<HTMLDivElement>(null)

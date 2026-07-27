@@ -6,12 +6,14 @@ import { CloudLayer } from '@/components/layers/CloudLayer'
 import { LightRaysLayer } from '@/components/layers/LightRaysLayer'
 import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
 import { Button } from '@/components/ui/Button'
+import { useMotionFeatures } from '@/app/MotionProvider'
 import { useIsMobile } from '@/hooks/useMediaQuery'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { useLenis } from '@/hooks/useScrollProgress'
 
 export function HeroSection() {
   const { hero } = getHeadlines()
+  const motion = useMotionFeatures()
   const isMobile = useIsMobile()
   const reducedMotion = useReducedMotion()
   const lenis = useLenis()
@@ -109,7 +111,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#f5dcc0] via-sky-rose/80 to-sky-haze" />
         <LightRaysLayer trigger="#hero" scrollStart="top top" scrollEnd={pinEnd} />
         <div className="absolute inset-0 bg-gradient-to-t from-canopy-shadow/20 to-transparent" />
-        <CloudLayer className="z-[1]" planes={4} />
+        <CloudLayer className="z-[1]" planes={motion.cloudPlanes} />
         <svg
           className="absolute bottom-0 left-0 w-full"
           viewBox="0 0 1440 200"
