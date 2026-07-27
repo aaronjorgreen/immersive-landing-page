@@ -9,10 +9,19 @@ interface CausticsLayerProps {
 export function CausticsLayer({ enabled = true }: CausticsLayerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const reducedMotion = useReducedMotion()
+  const visibleRef = useRef(true)
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas || !enabled || reducedMotion) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry?.isIntersecting ?? false
+      },
+      { threshold: 0.1 },
+    )
+    observer.observe(canvas)
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
@@ -29,21 +38,25 @@ export function CausticsLayer({ enabled = true }: CausticsLayerProps) {
     window.addEventListener('resize', resize)
 
     const draw = () => {
-      frame += 0.02
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.globalAlpha = 0.08
+      if (visibleRef.current) {
+        frame += 0.02
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.globalAlpha = 0.08
 
-      for (let i = 0; i < 6; i++) {
-        const x = ((Math.sin(frame + i * 1.2) + 1) / 2) * canvas.width
-        const y = ((Math.cos(frame * 0.8 + i * 0.9) + 1) / 2) * canvas.height * 0.5 + canvas.height * 0.3
-        const r = 40 + Math.sin(frame + i) * 20
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, r)
-        gradient.addColorStop(0, 'rgba(184,205,212,0.6)')
-        gradient.addColorStop(1, 'transparent')
-        ctx.fillStyle = gradient
-        ctx.beginPath()
-        ctx.arc(x, y, r, 0, Math.PI * 2)
-        ctx.fill()
+        for (let i = 0; i < 6; i++) {
+          const x = ((Math.sin(frame + i * 1.2) + 1) / 2) * canvas.width
+          const y =
+            ((Math.cos(frame * 0.8 + i * 0.9) + 1) / 2) * canvas.height * 0.5 +
+            canvas.height * 0.3
+          const r = 40 + Math.sin(frame + i) * 20
+          const gradient = ctx.createRadialGradient(x, y, 0, x, y, r)
+          gradient.addColorStop(0, 'rgba(184,205,212,0.6)')
+          gradient.addColorStop(1, 'transparent')
+          ctx.fillStyle = gradient
+          ctx.beginPath()
+          ctx.arc(x, y, r, 0, Math.PI * 2)
+          ctx.fill()
+        }
       }
 
       rafId = requestAnimationFrame(draw)
@@ -54,6 +67,7 @@ export function CausticsLayer({ enabled = true }: CausticsLayerProps) {
     return () => {
       cancelAnimationFrame(rafId)
       window.removeEventListener('resize', resize)
+      observer.disconnect()
     }
   }, [enabled, reducedMotion])
 

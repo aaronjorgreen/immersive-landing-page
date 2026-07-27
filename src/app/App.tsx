@@ -1,5 +1,6 @@
 import { ScrollProvider } from '@/app/ScrollProvider'
 import { AnalyticsProvider } from '@/app/AnalyticsProvider'
+import { MotionProvider } from '@/app/MotionProvider'
 import { ScrollHint } from '@/components/ui/ScrollHint'
 import { MiniNav } from '@/components/ui/MiniNav'
 import { StructuredData } from '@/components/seo/StructuredData'
@@ -15,6 +16,7 @@ import { CTASection } from '@/sections/CTASection'
 export default function App() {
   return (
     <ScrollProvider>
+      <MotionProvider>
       <AnalyticsProvider>
         <StructuredData />
         <div className="relative overflow-x-hidden">
@@ -34,6 +36,7 @@ export default function App() {
         </main>
         </div>
       </AnalyticsProvider>
+      </MotionProvider>
     </ScrollProvider>
   )
 }

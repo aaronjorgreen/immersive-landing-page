@@ -5,14 +5,13 @@ import { FireflyLayer } from '@/components/layers/FireflyLayer'
 import { ScrollRotatingHeadline } from '@/components/text/ScrollRotatingHeadline'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
 import { getHeadlines, getTestimonials } from '@/lib/content'
-import { getMotionFeatures, useMotionTier } from '@/hooks/useMotionTier'
+import { useMotionFeatures } from '@/app/MotionProvider'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function DepthsSection() {
   const { depths } = getHeadlines()
   const testimonials = getTestimonials()
-  const motionTier = useMotionTier()
-  const motion = getMotionFeatures(motionTier)
+  const motion = useMotionFeatures()
   const sectionRef = useRef<HTMLElement>(null)
   const reducedMotion = useReducedMotion()
 
