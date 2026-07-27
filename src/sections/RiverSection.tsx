@@ -114,10 +114,10 @@ export function RiverSection() {
 
       <div
         ref={copyRef}
-        className="relative flex min-h-[150vh] items-center justify-end px-8 md:px-16"
+        className="relative flex min-h-[150vh] items-center justify-center px-6 md:justify-end md:px-16"
         style={{ zIndex: Z_INDEX.typography }}
       >
-        <h2 className="max-w-md font-display text-[clamp(1.8rem,5vw,3.5rem)] text-river-silver/90 text-balance text-right">
+        <h2 className="max-w-md font-display text-[clamp(1.8rem,5vw,3.5rem)] text-river-silver/90 text-balance text-center md:text-right">
           The river carries everything.
         </h2>
       </div>

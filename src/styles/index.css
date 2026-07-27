@@ -88,6 +88,11 @@
     content-visibility: auto;
     contain-intrinsic-size: auto 100vh;
   }
+
+  .safe-x {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
 }
 
 @keyframes scroll-hint {

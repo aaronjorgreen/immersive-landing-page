@@ -41,6 +41,13 @@ export const BREAKPOINTS = {
   tablet: 1024,
 } as const
 
+/** Breakpoints for responsive design */
+export const MEDIA_QUERIES = {
+  mobile: `(max-width: ${BREAKPOINTS.mobile - 1}px)`,
+  tablet: `(min-width: ${BREAKPOINTS.mobile}px) and (max-width: ${BREAKPOINTS.tablet - 1}px)`,
+  desktop: `(min-width: ${BREAKPOINTS.tablet}px)`,
+} as const
+
 /** Brand copy */
 export const BRAND = {
   name: 'Selva Viva Expeditions',

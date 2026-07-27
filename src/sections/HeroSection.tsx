@@ -40,7 +40,8 @@ export function HeroSection() {
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: '+=100%',
+            end: () =>
+              window.innerWidth < 768 ? '+=60%' : '+=100%',
             pin: true,
             pinSpacing: true,
             scrub: true,
