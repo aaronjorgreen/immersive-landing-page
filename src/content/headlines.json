@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "lines": [
+      "Selva Viva Expeditions",
+      "Three to fourteen days on the Rio Negro.",
+      "Canopy walks. Black-water nights. Respectful river journeys.",
+      "Where the river remembers your name."
+    ],
+    "mobileLines": [
+      "Selva Viva Expeditions",
+      "Three to fourteen days on the Rio Negro.",
+      "Where the river remembers your name."
+    ]
+  },
+  "canopy": {
+    "lines": ["Descend into the green."]
+  },
+  "river": {
+    "lines": [
+      "The river carries everything.",
+      "Black water. Silver reflection. Ancient current."
+    ]
+  },
+  "wildlife": {
+    "lines": [
+      "River journeys",
+      "Canopy walks",
+      "Wildlife photography"
+    ]
+  },
+  "community": {
+    "headline": "Stories older than maps.",
+    "body": "Along the Rio Negro, communities have lived with the river for generations. We visit with respect — to listen, not to spectacle."
+  },
+  "depths": {
+    "lines": ["The river remembers."]
+  },
+  "arrival": {
+    "headline": "Begin Your Descent",
+    "subhead": "Your journey into the Amazon begins with a single step. Tell us where you want to go.",
+    "subheads": [
+      "Choose your expedition",
+      "Tell us your dates"
+    ]
+  },
+  "seasonality": "Best departures: May–September"
+}

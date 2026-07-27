@@ -1,0 +1,23 @@
+[
+  {
+    "id": "testimonial-1",
+    "quote": "We came for the river. We left with a story we still tell at dinner.",
+    "author": "Elena M.",
+    "location": "Barcelona, Spain",
+    "expedition": "canopy-current"
+  },
+  {
+    "id": "testimonial-2",
+    "quote": "No rush. No spectacle. Just the Amazon, and people who know how to listen to it.",
+    "author": "James K.",
+    "location": "Portland, USA",
+    "expedition": "rio-negro-dawn"
+  },
+  {
+    "id": "testimonial-3",
+    "quote": "Twelve days felt like a lifetime. The guides made every hour matter.",
+    "author": "Sophie L.",
+    "location": "Melbourne, Australia",
+    "expedition": "full-basin-immersion"
+  }
+]

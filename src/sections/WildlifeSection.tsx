@@ -2,22 +2,8 @@ import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
+import { getSectionContent } from '@/lib/content'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
-
-const HIGHLIGHTS = [
-  {
-    title: 'River journeys',
-    text: 'Three to fourteen days on the Rio Negro. Dawn mist. Night sounds.',
-  },
-  {
-    title: 'Canopy walks',
-    text: 'Walk the green cathedral. Look down on a world that never sleeps.',
-  },
-  {
-    title: 'Wildlife photography',
-    text: 'Patience rewarded. Pink dolphins. Toucans. The river at its quietest.',
-  },
-]
 
 function Bird({ path, className }: { path: string; className?: string }) {
   return (
@@ -34,6 +20,7 @@ function Bird({ path, className }: { path: string; className?: string }) {
 }
 
 export function WildlifeSection() {
+  const { wildlife } = getSectionContent()
   const sectionRef = useRef<HTMLElement>(null)
   const highlightsRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
@@ -111,7 +98,7 @@ export function WildlifeSection() {
         className="relative mx-auto flex min-h-[100vh] max-w-3xl flex-col justify-center gap-10 px-6 py-20"
         style={{ zIndex: Z_INDEX.typography }}
       >
-        {HIGHLIGHTS.map((item) => (
+        {wildlife.highlights.map((item) => (
           <div key={item.title} data-highlight className="border-l-2 border-wildlife-accent/50 pl-6">
             <h3 className="font-display text-[clamp(1.4rem,3vw,2rem)] text-canopy-mist/90">
               {item.title}

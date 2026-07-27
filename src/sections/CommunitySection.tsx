@@ -1,8 +1,10 @@
 import { ScrollRevealText } from '@/components/text/ScrollRevealText'
 import { ParallaxLayer } from '@/components/layers/ParallaxLayer'
 import { PARALLAX_RATIOS, Z_INDEX } from '@/lib/constants'
+import { getHeadlines } from '@/lib/content'
 
 export function CommunitySection() {
+  const { community } = getHeadlines()
   return (
     <section
       id="community"
@@ -36,11 +38,10 @@ export function CommunitySection() {
         <ScrollRevealText animation="fadeUp" trigger="#community">
           <div className="max-w-lg text-center">
             <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] text-community-warm text-balance">
-              Stories older than maps.
+              {community.headline}
             </h2>
             <p className="mt-6 font-sans text-base leading-relaxed text-community-warm/70 md:text-lg">
-              Along the Rio Negro, communities have lived with the river for generations.
-              We visit with respect — to listen, not to spectacle.
+              {community.body}
             </p>
           </div>
         </ScrollRevealText>

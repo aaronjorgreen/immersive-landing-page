@@ -55,3 +55,40 @@ export const BRAND = {
   cta: 'Begin Your Descent',
   location: 'Manaus, Brazil — Rio Negro basin',
 } as const
+
+/** CTA labels for distributed conversion ladder */
+export const CTA_LABELS = {
+  viewExpeditions: 'View Expeditions',
+  exploreJourneys: 'Explore journeys →',
+  compareExpeditions: 'Compare all expeditions',
+  meetGuides: 'Meet our guides →',
+  enquire: 'Enquire',
+  downloadItinerary: 'Download itinerary',
+  seeJourneyOptions: 'See journey options →',
+} as const
+
+/** Section IDs for navigation and scroll targets */
+export const SECTION_IDS = {
+  hero: 'hero',
+  canopy: 'canopy',
+  river: 'river',
+  wildlife: 'wildlife',
+  expeditions: 'expeditions',
+  community: 'community',
+  depths: 'depths',
+  arrival: 'arrival',
+} as const
+
+/** Analytics event names */
+export const ANALYTICS_EVENTS = {
+  heroHeadlineView: 'hero_headline_view',
+  sectionEnter: 'section_enter',
+  expeditionCardFocus: 'expedition_card_focus',
+  ctaClick: 'cta_click',
+  formStart: 'form_start',
+  formSubmit: 'form_submit',
+  scrollDepth: 'scroll_depth',
+} as const
+
+/** Pricing footnote */
+export const PRICING_FOOTNOTE = 'per person, shared cabin'
